@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://poem4love.github.io/"/>
-  <updated>2016-03-04T12:15:33.660Z</updated>
+  <updated>2016-05-15T13:40:12.003Z</updated>
   <id>http://poem4love.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三行代码爬所有title</title>
+    <link href="http://poem4love.github.io/2016/05/15/py/"/>
+    <id>http://poem4love.github.io/2016/05/15/py/</id>
+    <published>2016-05-15T13:23:49.000Z</published>
+    <updated>2016-05-15T13:40:12.003Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;strong&gt;&lt;em&gt;import requests&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;from bs4 import BeautifulSoup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;res = requests.get(&amp;#39;http://www.miserythestar.com&amp;#39;)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;soup = BeautifulSoup(res.text)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;for tag in (soup.select(&amp;#39;body div div div article h1 a&amp;#39;)):&lt;/code&gt; &lt;em&gt;&lt;em&gt;print tag.string&lt;/em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/py.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;以上&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;&lt;em&gt;import requests&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;from bs4 import BeautifulSoup&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;res = requests.get(
+    
+    </summary>
+    
+    
+      <category term="mistery" scheme="http://poem4love.github.io/tags/mistery/"/>
+    
+  </entry>
   
   <entry>
     <title>DARKLIGHT</title>

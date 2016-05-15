@@ -66,6 +66,58 @@
       <div id="main" class="wrapper">
         <div id="primary" class="site-content"><div id="content" role="main">
   
+    <article id="post-py" class="post-py post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title">
+      <a class="article-title" href="/2016/05/15/py/">三行代码爬所有title</a>
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/05/15/py/" data-id="cio8m6irl0000gsqm7ymusyai" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p><strong><em>import requests</em></strong></p>
+<p><strong><em>from bs4 import BeautifulSoup</em></strong></p>
+<p><code>res = requests.get(&#39;http://www.miserythestar.com&#39;)</code></p>
+<p><code>soup = BeautifulSoup(res.text)</code></p>
+<p><code>for tag in (soup.select(&#39;body div div div article h1 a&#39;)):</code> <em><em>print tag.string</em></em></p>
+<p><img src="/images/py.png" alt="image"></p>
+<p>以上</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/05/15/py/">
+    <time datetime="2016-05-15T13:23:49.000Z" class="entry-date">
+        2016-05-15
+    </time>
+</a>
+    
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mistery/">mistery</a></li></ul>
+
+    </footer>
+</article>
+
+
+
+
+
+
+  
     <article id="post-my-poem" class="post-my-poem post type-post status-publish format-standard hentry">
     <!---->
 
@@ -81,7 +133,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/03/04/my-poem/" data-id="cindzkqwh0007kgqmt46bi5as" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/03/04/my-poem/" data-id="cio8m6iuq000agsqm39rufe3z" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -141,7 +193,7 @@
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/02/21/new-commer/" data-id="cindzkqw90000kgqm73e33zt0" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/02/21/new-commer/" data-id="cio8m6is90003gsqmmpk51vc6" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -225,6 +277,10 @@
       <ul>
         
           <li>
+            <a href="/2016/05/15/py/">三行代码爬所有title</a>
+          </li>
+        
+          <li>
             <a href="/2016/03/04/my-poem/">DARKLIGHT</a>
           </li>
         
@@ -241,7 +297,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy/">easy</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy/">easy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mistery/">mistery</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </aside>
 
@@ -250,7 +306,7 @@
   <aside class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-content tagcloud">
-      <a href="/tags/easy/" style="font-size: 10px;">easy</a>
+      <a href="/tags/easy/" style="font-size: 10px;">easy</a> <a href="/tags/mistery/" style="font-size: 10px;">mistery</a>
     </div>
   </aside>
 
