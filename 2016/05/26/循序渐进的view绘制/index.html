@@ -17,20 +17,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="onmeasure
 MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
-static class MeasureSpec &amp;#">
+public static class Measure">
 <meta property="og:type" content="article">
 <meta property="og:title" content="循序渐进的view绘制">
 <meta property="og:url" content="http://poem4love.github.io/2016/05/26/循序渐进的view绘制/index.html">
 <meta property="og:site_name" content="SUMMER MEMORIES">
 <meta property="og:description" content="onmeasure
 MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
-static class MeasureSpec &amp;#">
-<meta property="og:updated_time" content="2016-05-25T23:52:06.353Z">
+public static class Measure">
+<meta property="og:updated_time" content="2016-05-25T23:53:41.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="循序渐进的view绘制">
 <meta name="twitter:description" content="onmeasure
 MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
-static class MeasureSpec &amp;#">
+public static class Measure">
   
   
     <link rel="icon" href="/avatar.ico">
@@ -86,7 +86,7 @@ static class MeasureSpec &amp;#">
         
         <div class="comments-link">
             
-            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/05/26/循序渐进的view绘制/" data-id="cionizsj30000x4qm8jyh65ys" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/05/26/循序渐进的view绘制/" data-id="cionj1de300003wqmj5anl5ee" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -94,23 +94,44 @@ static class MeasureSpec &amp;#">
       
         <p><strong><em>onmeasure</em></strong></p>
 <h4 id="MeasureSpecs"><a href="#MeasureSpecs" class="headerlink" title="MeasureSpecs"></a>MeasureSpecs</h4><p><em>MeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &lt;size, mode&gt; tuple into the int.</em></p>
-<figure class="highlight"><figcaption><span>static class MeasureSpec &#123;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#9;&#9;/*&#10;&#9;&#9;*&#39318;&#20808;,MeasureSpec&#23553;&#35013;&#20102;&#38656;&#35201;&#27979;&#37327;&#30340;view&#30340;size&#21644;mode.&#10;&#9;&#9;*/&#10;&#9;&#9;public static int makeMeasureSpec(int size, int mode) &#123;&#10;           &#9; if (sUseBrokenMakeMeasureSpec) &#123;&#10;                return size + mode;&#10;            &#125; else &#123;&#10;                return (size &#38; ~MODE_MASK) | (mode &#38; MODE_MASK);&#10;            &#125;&#10;        &#125;&#10;&#10;&#10;```//&#19968;&#20123;&#20195;&#30721;&#30465;&#30053;</span><br></pre></td></tr></table></figure>
-<pre><code>private static final int MODE_SHIFT = 30;
-private static final int MODE_MASK  = 0x3 &lt;&lt; MODE_SHIFT;
-public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;
-public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;
-public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;
+<pre><code>public static class MeasureSpec {
+    /*
+    *首先,MeasureSpec封装了需要测量的view的size和mode.
+    */
+    public static int makeMeasureSpec(int size, int mode) {
+            if (sUseBrokenMakeMeasureSpec) {
+            return size + mode;
+        } else {
+            return (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);
+        }
+    }
 
-/*
-*0X3 &lt;&lt; MODE_SHIFT相当于0000 0000 0000 0000 0000 0000 0000 0011左移30位,成为1100 0000 0000 0000 0000 0000 0000 0000
-*然后对需要测量的view的measureSpec进行&amp;MODE_MASK操作.用1对指定位进行&amp;(与运算)将得到指定位的值.MODE_MASK即1100 0000 0000 0000 0000 0000 0000 0000,的高2位是1.所以,相当于取到了view的measureSpec的高二位,即Mode.
-*/
+    //一些代码省略
+    private static final int MODE_SHIFT = 30;
+    private static final int MODE_MASK  = 0x3 &lt;&lt; MODE_SHIFT;
+    public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;
+    public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;
+    public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;
 
-  public static int getMode(int measureSpec) {
-    return (measureSpec &amp; MODE_MASK);
+    /*
+    *0X3 &lt;&lt; MODE_SHIFT相当于0000 0000 0000 0000 0000 0000 0000 0011左移30位,成为1100 0000 0000 0000 0000 0000 0000 0000
+    *然后对需要测量的view的measureSpec进行&amp;MODE_MASK操作.用1对指定位进行&amp;(与运算)将得到指定位的值.MODE_MASK即1100 0000 0000 0000 0000 0000 0000 0000,的高2位是1.所以,相当于取到了view的measureSpec的高二位,即Mode.
+    */
+
+      public static int getMode(int measureSpec) {
+        return (measureSpec &amp; MODE_MASK);
+    }
+    /*
+    *同理,现对MODE_MASK即1100 0000 0000 0000 0000 0000 0000 0000取反-&gt;--&gt;0011 1111 1111 1111 1111 1111 1111 1111;再进行&amp;得到了低30位.
+    */
+    public static int getSize(int measureSpec) {
+        return (measureSpec &amp; ~MODE_MASK);
+    }
+
 }
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#9;&#9;/*&#10;&#9;&#9;*&#21516;&#29702;,&#29616;&#23545;MODE_MASK&#21363;1100 0000 0000 0000 0000 0000 0000 0000&#21462;&#21453;-&#62;--&#62;0011 1111 1111 1111 1111 1111 1111 1111;&#20877;&#36827;&#34892;&#38;&#24471;&#21040;&#20102;&#20302;30&#20301;.&#10;&#9;&#9;*/&#10;&#9;&#9;public static int getSize(int measureSpec) &#123;&#10;            return (measureSpec &#38; ~MODE_MASK);&#10;        &#125;&#10;&#10;```&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><blockquote>
 <p><em>…to be countinue~</em></p>
+</blockquote>
 
       
     </div><!-- .entry-content -->
