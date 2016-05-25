@@ -13,17 +13,24 @@
   
   
   
-  <title>Archives: 2016/3 | SUMMER MEMORIES</title>
+  <title>循序渐进的view绘制 | SUMMER MEMORIES</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="let&apos;s play it~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SUMMER MEMORIES">
-<meta property="og:url" content="http://poem4love.github.io/archives/2016/03/index.html">
+  <meta name="description" content="onmeasure
+MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
+public static class Measure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="循序渐进的view绘制">
+<meta property="og:url" content="http://poem4love.github.io/2016/05/26/循序渐进的view绘制/index.html">
 <meta property="og:site_name" content="SUMMER MEMORIES">
-<meta property="og:description" content="let&apos;s play it~">
+<meta property="og:description" content="onmeasure
+MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
+public static class Measure">
+<meta property="og:updated_time" content="2016-05-25T23:45:56.090Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SUMMER MEMORIES">
-<meta name="twitter:description" content="let&apos;s play it~">
+<meta name="twitter:title" content="循序渐进的view绘制">
+<meta name="twitter:description" content="onmeasure
+MeasureSpecsMeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &amp;lt;size, mode&amp;gt; tuple into the int.
+public static class Measure">
   
   
     <link rel="icon" href="/avatar.ico">
@@ -64,43 +71,105 @@
     </nav>
 </header>
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-循序渐进的view绘制" class="post-循序渐进的view绘制 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="post type-post status-publish format-standard hentry archive-type-post">
-  <header class="entry-header">
-      
-  
-    <h1 class="entry-title">
-      <a class="archive-article-title" href="/2016/03/04/my-poem/">DARKLIGHT</a>
+    <h1 class="entry-title article-title">
+      循序渐进的view绘制
     </h1>
   
 
-  </header>
-  <footer class="entry-meta">
-    <a href="/2016/03/04/my-poem/">
-    <time datetime="2016-03-03T17:44:43.000Z" class="entry-date">
-        2016-03-04
+        
+        <div class="comments-link">
+            
+            <a href="javascript:void(0);" data-url="http://poem4love.github.io/2016/05/26/循序渐进的view绘制/" data-id="cionitu1n0000jwqm46dz72h5" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p><strong><em>onmeasure</em></strong></p>
+<h4 id="MeasureSpecs"><a href="#MeasureSpecs" class="headerlink" title="MeasureSpecs"></a>MeasureSpecs</h4><p><em>MeasureSpecs are implemented as ints to reduce object allocation. This class is provided to pack and unpack the &lt;size, mode&gt; tuple into the int.</em></p>
+<pre><code>public static class MeasureSpec {
+    /*
+    *首先,MeasureSpec封装了需要测量的view的size和mode.
+    */
+    public static int makeMeasureSpec(int size, int mode) {
+            if (sUseBrokenMakeMeasureSpec) {
+            return size + mode;
+        } else {
+            return (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);
+        }
+    }
+
+    //一些代码省略
+    private static final int MODE_SHIFT = 30;
+    private static final int MODE_MASK  = 0x3 &lt;&lt; MODE_SHIFT;
+    public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;
+    public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;
+    public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;
+
+    /*
+    *0X3 &lt;&lt; MODE_SHIFT相当于0000 0000 0000 0000 0000 0000 0000 0011左移30位,成为1100 0000 0000 0000 0000 0000 0000 0000
+    *然后对需要测量的view的measureSpec进行&amp;MODE_MASK操作.用1对指定位进行&amp;(与运算)将得到指定位的值.MODE_MASK即1100 0000 0000 0000 0000 0000 0000 0000,的高2位是1.所以,相当于取到了view的measureSpec的高二位,即Mode.
+    */
+
+      public static int getMode(int measureSpec) {
+        return (measureSpec &amp; MODE_MASK);
+    }
+    /*
+    *同理,现对MODE_MASK即1100 0000 0000 0000 0000 0000 0000 0000取反-&gt;--&gt;0011 1111 1111 1111 1111 1111 1111 1111;再进行&amp;得到了低30位.
+    */
+    public static int getSize(int measureSpec) {
+        return (measureSpec &amp; ~MODE_MASK);
+    }
+
+}
+</code></pre><blockquote>
+<p><em>…to be countinue~</em></p>
+</blockquote>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2016/05/26/循序渐进的view绘制/">
+    <time datetime="2016-05-25T23:45:59.000Z" class="entry-date">
+        2016-05-26
     </time>
 </a>
     
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/幻想/">幻想</a>
+  </div>
+
     
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/easy/">easy</a></li></ul>
+
     </footer>
 </article>
-  
-  
-    </div></section>
-  
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+    
+        <span class="nav-next"><a href="/2016/05/15/py/" rel="next">三行代码爬所有title <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
 
 </div></div>
         <div id="secondary" class="widget-area" role="complementary">
